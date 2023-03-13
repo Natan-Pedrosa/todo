@@ -2,6 +2,7 @@ package com.np.todos.controller;
 
 import com.np.todos.dto.DTOUser;
 import com.np.todos.entity.User;
+import com.np.todos.exception.GeralNoResultException;
 import com.np.todos.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class UserController {
     @GetMapping("{id}")
     public ResponseEntity<User> findById(@PathVariable(value = "id") Long id){
 
-        return ResponseEntity.ok(service.findById(id));
+        return ResponseEntity.ok(service.findById(id).orElseThrow(() -> new GeralNoResultException("Não encontrado usuário")));
     }
+
 }
