@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "projeto")
-public class Project extends Object{
+public class Project extends BaseObject {
 
     private String name;
     private String description;

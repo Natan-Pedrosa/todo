@@ -25,12 +25,20 @@ public class ProjectController {
                 body(service.save(dtoProject));
     }
     @GetMapping("{id}")
-    public ResponseEntity<Project> findById(@NonNull @PathVariable(name = "id") Long idProject){
+    public ResponseEntity<Project> findById(@NonNull @PathVariable("id") Long idProject){
         return ResponseEntity.ok(service.findById(idProject).orElseThrow(() -> new GeralNoResultException("Projeto não encotrado")));
     }
     @GetMapping("all/{id}")
-    public List<Project> findAll(@NonNull @PathVariable(name = "id") Long idUser){
+    public List<Project> findAll(@NonNull @PathVariable("id") Long idUser){
         return service.findAllByIdUser(idUser);
     }
+    @PutMapping("{id}")
+    public ResponseEntity<Project> update(@NonNull @RequestBody DTOProject dtoProject, @NonNull @PathVariable("id") Long idProject){
+
+        return ResponseEntity.ok(service.update(dtoProject, idProject));
+    }
+
+
+
 
 }

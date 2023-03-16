@@ -1,6 +1,5 @@
 package com.np.todos.repository;
 
-import com.np.todos.dto.DTOUser;
 import com.np.todos.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

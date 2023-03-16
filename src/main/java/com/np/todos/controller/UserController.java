@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<User> findById(@PathVariable(value = "id") Long id){
+    public ResponseEntity<User> findById(@PathVariable("id") Long id){
 
         return ResponseEntity.ok(service.findById(id).orElseThrow(() -> new GeralNoResultException("Não encontrado usuário")));
     }

@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @AllArgsConstructor
@@ -31,6 +32,8 @@ public class ProjectServiceImple implements ProjectService {
         project.setUser(user);
         project.setCreated(LocalDateTime.now());
         project.setUpdated(LocalDateTime.now());
+        project.setTasks(new ArrayList<>());
+        project.setDescription("");
 
         return repository.save(project);
     }
@@ -41,5 +44,17 @@ public class ProjectServiceImple implements ProjectService {
     @Override
     public List<Project> findAllByIdUser(Long idUser) {
         return repository.findAllByUserId(idUser);
+    }
+
+    @Override
+    public Project update(DTOProject dtoProject, Long idProject) {
+        Optional<Project> optionalProject = repository.findById(idProject);
+        Project project = optionalProject.orElseThrow(() -> new GeralNoResultException("Projecto não encontrado para atualizar"));
+
+        Project updatedProject = mapper.map(dtoProject, Project.class);
+        project.setName(updatedProject.getName());
+        project.setUpdated(LocalDateTime.now());
+
+        return repository.save(project);
     }
 }

@@ -1,28 +1,29 @@
 package com.np.todos.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "tarefa")
-public class Task extends Object{
+public class Task extends BaseObject {
 
     private String name;
     private String description;
-    private boolean important;
-    private boolean completed;
+    @Column(name = "is_important")
+    private Boolean isImportant;
+    @Column(name = "is_completed")
+    private Boolean isCompleted;
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
-    private LocalDateTime expectFinalized;
-    private LocalDateTime finalized;
+
+    @Column(name = "expect_finalized")
+    private LocalDate expectFinalized;
+    private LocalDate finalized;
 
     @JsonBackReference
     public Project getProject() {

@@ -18,8 +18,8 @@ public class JacksonConfiguration {
 
         return builder -> {
             // formatter
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
             // deserializers
             builder.deserializers(new LocalDateDeserializer(dateFormatter));
